@@ -22,11 +22,13 @@ const Customers = () => {
     }
   }, [id]);
 
+  const API = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
   // Fetch customer basic info
   const fetchCustomerInfo = async () => {
     try {
-      const res = await fetch(`http://localhost:5000/banker/customer/${id}`, {
-        headers: { Authorization: localStorage.getItem("token") },
+      const res = await fetch(`${API}/banker/customer/${id}`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
 
       const result = await res.json();
@@ -43,12 +45,9 @@ const Customers = () => {
   // Fetch transaction history
   const fetchTransactions = async () => {
     try {
-      const res = await fetch(
-        `http://localhost:5000/banker/customer/${id}/transactions`,
-        {
-          headers: { Authorization: localStorage.getItem("token") },
-        }
-      );
+      const res = await fetch(`${API}/banker/customer/${id}/transactions`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      });
 
       const result = await res.json();
       if (result.success) {

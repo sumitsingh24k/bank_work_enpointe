@@ -6,6 +6,8 @@ const Bankers = () => {
   const [loading, setLoading] = useState(true);
 
   // Check if banker is logged in
+  const API = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     const role = localStorage.getItem("role");
@@ -20,9 +22,9 @@ const Bankers = () => {
   // Fetch all customers
   const fetchCustomers = async () => {
     try {
-      const res = await fetch("http://localhost:5000/banker/customers", {
+      const res = await fetch(`${API}/banker/customers`, {
         headers: {
-          Authorization: localStorage.getItem("token"),
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
 

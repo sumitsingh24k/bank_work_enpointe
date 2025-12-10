@@ -1,4 +1,6 @@
 import React from 'react'
+const API = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
 const LoginOrSignups = () => {
     const [login, setlogin] = React.useState(true);
     const [name, setName] = React.useState("");
@@ -30,7 +32,7 @@ const LoginOrSignups = () => {
         const data = { name, email, password, role };
 
         try {
-            const res = await fetch("http://localhost:5000/signup", {
+            const res = await fetch(`${API}/signup`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(data)
@@ -58,7 +60,7 @@ const LoginOrSignups = () => {
         const data = { email, password, role };
 
         try {
-            const res = await fetch("http://localhost:5000/login", {
+            const res = await fetch(`${API}/login`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(data)
@@ -71,7 +73,7 @@ const LoginOrSignups = () => {
                 localStorage.setItem("role", result.role);
 
                 if (result.role === "customer") {
-                    window.location.href = "/customer/dashboard";
+                    window.location.href = "/customer/transactions";
                 } else {
                     window.location.href = "/banker/dashboard";
                 }
