@@ -13,6 +13,8 @@ function App() {
         <Route path="/banker/dashboard" element={<Bankers />} />
         <Route path="/banker/customer/:id" element={<Customers />} />
         <Route path="/customer/dashboard" element={<CustomerDashboard />} />
+        {/* Keep singular path working in production (legacy link) */}
+        <Route path="/customer/transaction" element={<CustomerTransactions />} />
         <Route path="/customer/transactions" element={<CustomerTransactions />} />
       </Routes>
     </BrowserRouter>
